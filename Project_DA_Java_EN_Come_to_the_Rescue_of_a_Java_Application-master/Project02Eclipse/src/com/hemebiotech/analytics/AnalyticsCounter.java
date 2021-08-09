@@ -20,13 +20,13 @@ public class AnalyticsCounter {
 	 * @param args
 	 * 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
 		// PArcourir le fichier et recuperer la liste des lignes dans un tableau "List"
 		// Grace à ReadSymptomDataFromFile
 		ISymptomReader iReader = new ReadSymptomDataFromFile("symptoms.txt");
-		List<String> symptoms = iReader.GetSymptoms();
+		List<String> symptoms = iReader.getSymptoms();
 
 		// Compter les symptomes recuperés de la liste et creer un tableau
 		// qui contient clé= symptome/valeur=occurence
@@ -38,11 +38,12 @@ public class AnalyticsCounter {
 	}
 
 	/**
-	 * la fonction countSymptoms permet de compter et trier les symptomes 
+	 * la fonction countSymptoms permet de compter et trier les symptomes
+	 * 
 	 * @param lst liste des symptomes disponibles dans le fichier
 	 * 
-	 * @return un TreeMap avec les symptomes triés par ordre
-	 *         alphabétique avec le nombre d'occurence de chacun
+	 * @return un TreeMap avec les symptomes triés par ordre alphabétique avec le
+	 *         nombre d'occurence de chacun
 	 * 
 	 */
 	public TreeMap<String, Integer> countSymptoms(List<String> lst) {
@@ -59,17 +60,18 @@ public class AnalyticsCounter {
 
 	}
 
-	
 	/**
 	 * Elaboration d'un fichier resultat d'un MAP
+	 * 
 	 * @param fileName c'est le nom du fichier resultat
 	 * 
-	 * @param output  c'est le MAP à exploiter par le fichier resultant
-	 *  
+	 * @param output   c'est le MAP à exploiter par le fichier resultant
+	 * 
 	 */
-	public static void writeOutPutFile(String fileName, Map<String, Integer> output) {
+	public static void writeOutPutFile(String fileName, Map<String, Integer> output) throws IOException {
 
 		FileWriter writer;
+		writer = null;
 		try {
 			writer = new FileWriter(fileName);
 
@@ -85,15 +87,15 @@ public class AnalyticsCounter {
 
 			}
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
 			// fermer le fichier
 
 			writer.close();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
 	}
-
 }
